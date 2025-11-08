@@ -1,4 +1,4 @@
-# RAG con LangChain (Repositorio 2)
+# RAG con LangChain
 
 **Objetivo:** Implementar un sistema de *Retrieval-Augmented Generation (RAG)* que responda preguntas usando tus propios documentos, siguiendo la guía de LangChain, con dos backends intercambiables: **OpenAI** (requiere API key) u **Ollama** (100% local y gratis).
 
