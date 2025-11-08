@@ -108,7 +108,7 @@ uvicorn src.rag.api:app --reload --port 8000
 ```
 
 ### Ejemplos
-**cURL**
+**Curl**
 ```bash
 curl -s -X POST http://localhost:8000/query \
   -H "Content-Type: application/json" \
@@ -132,9 +132,7 @@ Invoke-RestMethod -Method POST `
 │       ├── api.py               # FastAPI con /query
 │       ├── chat_cli.py          # REPL en terminal
 │       ├── ingest.py            # indexado/actualización de FAISS
-│       └── rag_chain.py         # construcción del retriever y RAG chain
-├── tests/
-│   └── test_rag.py              # prueba rápida (salta si no hay OPENAI_API_KEY)
+│       └── rag_chain.py         # construcción del retriever y RAG chain          
 ├── .env.example
 ├── requirements.txt
 ├── README.md
@@ -153,7 +151,7 @@ Invoke-RestMethod -Method POST `
 ```bash
 pytest -q
 ```
-> El test de ejemplo usa OpenAI por defecto y **se salta** si no hay `OPENAI_API_KEY`. Puedes adaptarlo a Ollama si quieres testear localmente.
+> El test de ejemplo usa OpenAI por defecto y **se salta** si no hay `OPENAI_API_KEY`.
 
 ## Solución de problemas
 - **Deprecation warnings de Ollama en LangChain:** instala `langchain-ollama` y usa  
@@ -163,11 +161,6 @@ pytest -q
 - **FAISS en Windows:** viene fijado en `requirements.txt`. Si tu entorno falla, revisa la versión de Python o reinstala el wheel.
 
 ## Evidencias
-Incluye capturas de:
-1) Consola de ingesta mostrando totales de documentos/chunks.  
-2) Respuesta en `chat_cli`.  
-3) Llamada a `/query` con `curl` o PowerShell.
-
 
 **Evidencia del modelo respondiendo (Chat CLI):**
 
