@@ -1,0 +1,49 @@
+﻿**********************
+Inicio de la transcripción de Windows PowerShell
+Hora de inicio: 20251108105945
+Nombre de usuario: DESKTOP-R81CAM6\AD
+Usuario RunAs: DESKTOP-R81CAM6\AD
+Nombre de la configuración: 
+Máquina: DESKTOP-R81CAM6 (Microsoft Windows NT 10.0.26100.0)
+Aplicación host: C:\WINDOWS\System32\WindowsPowerShell\v1.0\powershell.exe -noexit -command try { . "c:\Users\AD\AppData\Local\Programs\Microsoft VS Code\resources\app\out\vs\workbench\contrib\terminal\common\scripts\shellIntegration.ps1" } catch {}
+Id. de proceso: 20612
+PSVersion: 5.1.26100.6899
+PSEdition: Desktop
+PSCompatibleVersions: 1.0, 2.0, 3.0, 4.0, 5.0, 5.1.26100.6899
+BuildVersion: 10.0.26100.6899
+CLRVersion: 4.0.30319.42000
+WSManStackVersion: 3.0
+PSRemotingProtocolVersion: 2.3
+SerializationVersion: 1.1.0.1
+**********************
+La transcripción ha comenzado. El archivo de salida es .\evidence_ingesta.txt
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cAD\x5cDesktop\x5cAREP\x5crag-langchain-repoPS C:\Users\AD\Desktop\AREP\rag-langchain-repo> ]633;B
+(.venv) $docCount = (Get-ChildItem .\data -Recurse -Include *.pdf,*.txt,*.md | Measure-Object).Count
+
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cAD\x5cDesktop\x5cAREP\x5crag-langchain-repoPS C:\Users\AD\Desktop\AREP\rag-langchain-repo> ]633;B
+(.venv) Write-Host "Documentos en .\data: $docCount"
+
+Documentos en .\data: 1
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cAD\x5cDesktop\x5cAREP\x5crag-langchain-repoPS C:\Users\AD\Desktop\AREP\rag-langchain-repo> ]633;B
+(.venv) python -m src.rag.ingest --data_dir .\data --persist_dir .\.vectorstore --chunk_size 800 --chunk_overlap 120
+
+C:\Users\AD\Desktop\AREP\rag-langchain-repo\src\rag\rag_chain.py:27: LangChainDeprecationWarning: The class `OllamaEmbeddings` was deprecated in LangChain 0.3.1 and will be removed in 1.0.0. An upda
+ted version of the class exists in the :class:`~langchain-ollama package and should be used instead. To use it run `pip install -U :class:`~langchain-ollama` and import as `from :class:`~langchain_o
+llama import OllamaEmbeddings``.
+  return OllamaEmbeddings(model=model)
+✅✅ Índice FAISS guardado en .\.vectorstore
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cAD\x5cDesktop\x5cAREP\x5crag-langchain-repoPS C:\Users\AD\Desktop\AREP\rag-langchain-repo> ]633;B
+(.venv) python -c "from src.rag.rag_chain import load_vectorstore; vs=load_vectorstore(r'.\.vectorstore'); print('Chunks indexados:', vs.index.ntotal)"
+
+C:\Users\AD\Desktop\AREP\rag-langchain-repo\src\rag\rag_chain.py:27: LangChainDeprecationWarning: The class `OllamaEmbeddings` was deprecated in LangChain 0.3.1 and will be removed in 1.0.0. An upda
+ted version of the class exists in the :class:`~langchain-ollama package and should be used instead. To use it run `pip install -U :class:`~langchain-ollama` and import as `from :class:`~langchain_o
+llama import OllamaEmbeddings``.
+  return OllamaEmbeddings(model=model)
+Chunks indexados: 1
+]633;D;0]633;A]633;P;Cwd=C:\x5cUsers\x5cAD\x5cDesktop\x5cAREP\x5crag-langchain-repoPS C:\Users\AD\Desktop\AREP\rag-langchain-repo> ]633;B
+(.venv) Stop-Transcript
+
+**********************
+Fin de la transcripción de Windows PowerShell
+Hora de finalización: 20251108110012
+**********************
