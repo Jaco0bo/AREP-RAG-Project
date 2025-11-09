@@ -15,7 +15,7 @@ def main():
     vs = load_vectorstore(args.persist_dir)
     chain = make_rag_chain(vs)
 
-    print("💬 RAG listo. Escribe 'exit' para salir.")
+    print("RAG listo. Escribe 'exit' para salir.")
     while True:
         q = input("> ").strip()
         if q.lower() in {"exit", "quit"}:

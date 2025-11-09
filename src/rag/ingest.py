@@ -17,7 +17,7 @@ def main():
         chunk_size=args.chunk_size,
         chunk_overlap=args.chunk_overlap,
     )
-    print(f"✅ Índice FAISS guardado en {args.persist_dir}")
+    print(f"Índice FAISS guardado en {args.persist_dir}")
 
 if __name__ == "__main__":
     main()

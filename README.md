@@ -8,12 +8,12 @@
 - **Embeddings**  
   - `OpenAIEmbeddings` (si usas OpenAI), o  
   - `OllamaEmbeddings` (si usas Ollama / local).
-- **Vector store** (FAISS) — indexa los vectores para recuperación semántica.
-- **Retriever** — busca los *k* fragmentos más relevantes.
+- **Vector store** (FAISS): Indexa los vectores para recuperación semántica.
+- **Retriever**: Busca los *k* fragmentos más relevantes.
 - **LLM**  
   - `ChatOpenAI` (OpenAI), o  
   - `ChatOllama` (Ollama / local).
-- **Chain (LCEL)** — tubería con `Runnable` + `ChatPromptTemplate` + `StrOutputParser`.
+- **Chain (LCEL)**: Tubería con `Runnable` + `ChatPromptTemplate` + `StrOutputParser`.
 
 ```
 [Docs] -> [Loaders] -> [Splitter] -> [Embeddings] -> [FAISS] -> [Retriever]
@@ -26,34 +26,33 @@
 ## Requisitos
 - Python 3.9+
 - **Backend a elegir (uno de los dos):**
-  - **OpenAI**: cuenta + `OPENAI_API_KEY`.
-  - **Ollama (recomendado si no tienes saldo)**: instalación local de Ollama y modelos open-source.
+  - **OpenAI**: Cuenta + ``OPENAI_API_KEY``.
+  - **Ollama (recomendado si no tienes saldo)**: Instalación local de Ollama y modelos open-source.
 
 ## Instalación
 ```bash
-# 1) crear entorno
+# 1) Crear entorno
 python -m venv .venv && source .venv/bin/activate
 # En Windows PowerShell: .venv\\Scripts\\Activate.ps1
 
-# 2) instalar dependencias
+# 2) Instalar dependencias
 pip install -r requirements.txt
 
-# 3) variables base
+# 3) Variables base
 cp .env.example .env
-# edita .env si usarás OPENAI (ver más abajo “Elegir backend”)
+# Edita .env si usarás OPENAI (ver más abajo “Elegir backend”)
 ```
 
 ## Elegir backend
 
 ### A) OpenAI (requiere API key)
 - Edita `.env` y coloca `OPENAI_API_KEY=...` (opcional `OPENAI_MODEL`).
-- No definas `RAG_BACKEND` (modo `auto` usa OpenAI si hay API key), o pon:
-  - `RAG_BACKEND=openai`
+- No definas `RAG_BACKEND` o pon `RAG_BACKEND=openai`
 
 **Windows PowerShell (session actual):**
 ```powershell
 $env:OPENAI_API_KEY = "tu_api_key"
-# opcional:
+# Opcional:
 $env:OPENAI_MODEL = "gpt-4o-mini"
 $env:RAG_BACKEND = "openai"
 ```
@@ -79,7 +78,7 @@ $env:RAG_BACKEND = "ollama"
 $env:OLLAMA_MODEL = "llama3.2"
 $env:EMBEDDING_MODEL = "nomic-embed-text"
 ```
-5) (Opcional) Verifica que el servicio de Ollama responda:
+5) Verifica que el servicio de Ollama responda:
 ```powershell
 Invoke-RestMethod http://localhost:11434/api/tags | Out-Null
 ```
@@ -96,7 +95,7 @@ Esto crea/actualiza un índice FAISS persistente en `./.vectorstore`.
 ## Chat (CLI)
 ```bash
 python -m src.rag.chat_cli --persist_dir ./.vectorstore
-# escribe tu pregunta, por ejemplo:
+# Escribe una pregunta como:
 # > ¿De qué trata el archivo de ejemplo?
 ```
 
@@ -104,7 +103,7 @@ python -m src.rag.chat_cli --persist_dir ./.vectorstore
 Inicia un servicio local para consultas vía REST:
 ```bash
 uvicorn src.rag.api:app --reload --port 8000
-# POST http://localhost:8000/query  body: {"question": "tu pregunta"}
+# POST http://localhost:8000/query  body: {"question": "Tu pregunta"}
 ```
 
 ### Ejemplos
@@ -126,7 +125,7 @@ Invoke-RestMethod -Method POST `
 ## Estructura del repo
 ```
 .
-├── data/                        # tus PDFs/TXT/MD
+├── data/                        # PDFs/TXT/MD
 ├── src/
 │   └── rag/
 │       ├── api.py               # FastAPI con /query
@@ -151,14 +150,14 @@ Invoke-RestMethod -Method POST `
 ```bash
 pytest -q
 ```
-> El test de ejemplo usa OpenAI por defecto y **se salta** si no hay `OPENAI_API_KEY`.
+**El test de ejemplo usa OpenAI por defecto y **se salta** si no hay `OPENAI_API_KEY`.**
 
 ## Solución de problemas
-- **Deprecation warnings de Ollama en LangChain:** instala `langchain-ollama` y usa  
+- **Deprecation warnings de Ollama en LangChain:** Instala `langchain-ollama` y usa  
   `from langchain_ollama import OllamaEmbeddings, ChatOllama`.
-- **Ollama no responde:** asegúrate de haber hecho `ollama pull ...` y que el servicio esté activo  
+- **Ollama no responde:** Asegúrate de haber hecho `ollama pull ...` y que el servicio esté activo  
   (`Invoke-RestMethod http://localhost:11434/api/tags | Out-Null`).
-- **FAISS en Windows:** viene fijado en `requirements.txt`. Si tu entorno falla, revisa la versión de Python o reinstala el wheel.
+- **FAISS en Windows:** Viene fijado en `requirements.txt`. Si tu entorno falla, revisa la versión de Python o reinstala el wheel.
 
 ## Evidencias
 
